@@ -23,7 +23,7 @@ const getContactById = async (contactId) => {
     return result;
 }
 
-const addContact = async (name, email, phone) => {
+const addContact = async ({name, email, phone}) => {
     const contacts = await listContacts();
     const newContact = {
         id: ObjectID().id,
@@ -31,6 +31,7 @@ const addContact = async (name, email, phone) => {
         email,
         phone,
     };
+    console.log(newContact)
     contacts.push(newContact);
     updateContactsList(contacts);
     return newContact;
