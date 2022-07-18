@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const regex=require('../regex/regex')
+const regex=require('../helpers/regex/regex')
 
 const addSchema = Joi.object({
     name: Joi.string().required(),
