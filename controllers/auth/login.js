@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const {User} = require('../../models/user');
-const {createError} = require('../../helpers/createError');
+const {createError} = require('../../helpers');
 const jwt = require("jsonwebtoken");
 const {SECRET_KEY} = process.env;
 
@@ -12,8 +12,7 @@ const login = async (req, res) => {
         throw createError(401, "Email or password is wrong");
     }
 
-    const comparePassword = await bcrypt.compare(password, user.password);
-    if (!comparePassword) {
+    if(!bcrypt.compare(password, user.password)){
         throw createError(401, "Email or password is wrong");
     }
     const payload = {
