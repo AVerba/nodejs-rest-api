@@ -4,7 +4,7 @@ const ctrlAuth = require("../../controllers/auth");
 
 const {ctrlWrapper} = require('../../helpers/')
 
-const {validation, authenticate} = require('../../middlewares');
+const {validation, authenticate, upload} = require('../../middlewares');
 
 const {schemas} = require('../../models/user');
 
@@ -25,5 +25,7 @@ router.get('/current', authenticate, ctrlWrapper(ctrlAuth.getCurrent));
 // update subscription user
 router.patch('/', validation(schemas.updateSubscription), authenticate, ctrlWrapper(ctrlAuth.updateSubscription))
 
+// upload avatars
+router.patch("/avatars", authenticate, upload.single("avatar"), ctrlWrapper(ctrlAuth.updateAvatar));
 
 module.exports = router;
